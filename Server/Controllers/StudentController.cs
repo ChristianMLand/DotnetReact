@@ -51,6 +51,7 @@ public class StudentController(ApiContext context) : ControllerBase
     {
         Student? existingStudent = await _context.Students.FindAsync(id);
         if (existingStudent == null) return NotFound();
+        if (!ModelState.IsValid) return BadRequest(ModelState);
         existingStudent.Name = student.Name;
         existingStudent.Email = student.Email;
         await _context.SaveChangesAsync();
