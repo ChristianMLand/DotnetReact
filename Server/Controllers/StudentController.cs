@@ -26,10 +26,7 @@ public class StudentController(ApiContext context) : ControllerBase
     [HttpPost]
     public async Task<ActionResult<Student>> CreateStudent([FromBody] Student student)
     {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(ModelState);
-        }
+        if (!ModelState.IsValid) return BadRequest(ModelState);
         _context.Students.Add(student);
         await _context.SaveChangesAsync();
 
